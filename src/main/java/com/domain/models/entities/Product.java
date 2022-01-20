@@ -8,29 +8,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_product")
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="product_name", length = 100)
+    @NotEmpty(message = "Name is required ")
+    @Column(name = "product_name", length = 100)
     private String name;
 
-    @Column(name="product_description", length = 500)
+    @NotEmpty(message = "Description is required ")
+    @Column(name = "product_description", length = 500)
     private String description;
 
     private double price;
-    
+
     public Product() {
     }
-    
+
     public Product(Long id, String name, String description, double price) {
         this.id = id;
         this.name = name;
@@ -69,5 +71,5 @@ public class Product implements Serializable{
     public void setPrice(double price) {
         this.price = price;
     }
-    
+
 }
